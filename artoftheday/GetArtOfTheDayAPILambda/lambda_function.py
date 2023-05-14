@@ -47,7 +47,18 @@ def lambda_handler(event, context):
     image_key = f'{date}.png'  # The image key is the date with the ".png" extension
 
     try:
-        image_data = s3.get_object(Bucket=bucket_name, Key=image_key)['Body'].read()
+        image_data = ""
+        try:
+            image_data = s3.get_object(Bucket=bucket_name, Key=image_key)['Body'].read()
+        except s3.exceptions.NoSuchKey as e:
+            print(f"{image_key} not found")
+            return {
+                'statusCode': '404',
+                'body': image_key + " not found",
+                'headers': {
+                    'Access-Control-Allow-Origin': '*',
+                }
+            }
 
         # Base64-encode the image data
         encoded_image_data = base64.b64encode(image_data)
