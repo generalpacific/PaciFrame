@@ -3,6 +3,7 @@ import csv
 import json
 import openai
 import os
+import pytz
 import random
 import requests
 import tempfile
@@ -39,8 +40,10 @@ def generate_image(prompt):
     # Download the image from the URL
     image_data = requests.get(image_url).content
 
+    tz = pytz.timezone('US/Pacific')
+    now = datetime.now(tz)
     # Generate the S3 key with today's date
-    date_str = datetime.now().strftime("%Y-%m-%d")
+    date_str = now.strftime("%Y-%m-%d")
     s3_key = f"{date_str}.png"
 
     # Upload the prompt to S3
