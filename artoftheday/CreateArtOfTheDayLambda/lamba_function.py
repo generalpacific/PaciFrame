@@ -56,6 +56,7 @@ def generate_image(prompt):
         temp_file.write(image_data)
         temp_file.seek(0)
         s3.upload_fileobj(temp_file, os.environ['ARTOFTHEDAY_S3_BUCKET'], s3_key)
+    return date_str
 
 
 def read_from_csv():
@@ -92,8 +93,8 @@ def lambda_handler(event, context):
                              )
     print("Generated prompt: " + prompt)
     print("Generating image...")
-    generate_image(prompt)
+    date_str = generate_image(prompt)
     return {
         'statusCode': 200,
-        'body': json.dumps('Image saved.')
+        'body': json.dumps('Image saved. Date: ' + date_str)
     }
