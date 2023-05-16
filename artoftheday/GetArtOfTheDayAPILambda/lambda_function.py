@@ -45,28 +45,21 @@ def lambda_handler(event, context):
 
     bucket_name = os.environ['ART_OF_THE_DAY_BUCKET_NAME']
     image_key = f'{date}.png'  # The image key is the date with the ".png" extension
+    text_key = f'{date}-prompt.txt'  # The text key is the date with the ".txt" extension
 
     try:
-        image_data = ""
-        try:
-            image_data = s3.get_object(Bucket=bucket_name, Key=image_key)['Body'].read()
-        except s3.exceptions.NoSuchKey as e:
-            print(f"{image_key} not found")
-            return {
-                'statusCode': '404',
-                'body': image_key + " not found",
-                'headers': {
-                    'Access-Control-Allow-Origin': '*',
-                }
-            }
+        image_data = s3.get_object(Bucket=bucket_name, Key=image_key)['Body'].read()
+        text_data = s3.get_object(Bucket=bucket_name, Key=text_key)['Body'].read().decode('utf-8')
 
         # Base64-encode the image data
         encoded_image_data = base64.b64encode(image_data)
 
         return {
             'statusCode': 200,
-            'body': encoded_image_data,
-            'isBase64Encoded': True,
+            'body': json.dumps({
+                'image': encoded_image_data.decode('utf-8'),
+                'prompt': text_data
+            }),
             'headers': {
                 'Content-Type': 'image/png',
                 'Access-Control-Allow-Origin': '*'
