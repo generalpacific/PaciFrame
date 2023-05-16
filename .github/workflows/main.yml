@@ -15,7 +15,7 @@ jobs:
           aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           aws_region: ${{ secrets.AWS_REGION }}
           function_name: CreateArtOfTheDayLambda 
-          source: artoftheday/CreateArtOfTheDayLambda/lamba_function.py
+          source: artoftheday/CreateArtOfTheDayLambda/lambda_function.py
   
   deploy_create_daily_digest_lambda:
     name: Deploy GetArtOfTheDayAPILambda
