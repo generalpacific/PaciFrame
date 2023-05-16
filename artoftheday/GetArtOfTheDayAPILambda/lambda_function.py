@@ -3,10 +3,9 @@ import boto3
 import json
 import os
 
-s3 = boto3.client('s3')
-
 
 def lambda_handler(event, context):
+    s3 = boto3.client('s3')
     print(type(event))
     print(event)
     print("Event json %s" % json.dumps(event))
@@ -49,7 +48,7 @@ def lambda_handler(event, context):
 
     try:
         image_data = s3.get_object(Bucket=bucket_name, Key=image_key)['Body'].read()
-        text_data = s3.get_object(Bucket=bucket_name, Key=text_key)['Body'].read().decode('utf-8')
+        prompt_data = s3.get_object(Bucket=bucket_name, Key=text_key)['Body'].read().decode('utf-8')
 
         # Base64-encode the image data
         encoded_image_data = base64.b64encode(image_data)
@@ -58,7 +57,7 @@ def lambda_handler(event, context):
             'statusCode': 200,
             'body': json.dumps({
                 'image': encoded_image_data.decode('utf-8'),
-                'prompt': text_data
+                'prompt': prompt_data
             }),
             'headers': {
                 'Content-Type': 'image/png',
