@@ -20,7 +20,6 @@ def generate_prompt(style, medium, colors, objects, theme):
 
 def generate_image(prompt):
     # Set the model parameters
-    model = "image-alpha-001"
     num_images = 1
     size = "1024x1024"
     response_format = "url"
@@ -28,7 +27,6 @@ def generate_image(prompt):
     # Call the DALL-E API
     response = openai.Image.create(
         prompt=prompt,
-        model=model,
         n=num_images,
         size=size,
         response_format=response_format
