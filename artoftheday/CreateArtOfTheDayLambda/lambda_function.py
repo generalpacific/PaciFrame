@@ -26,6 +26,7 @@ def generate_image(prompt):
 
     # Call the DALL-E API
     response = openai.Image.create(
+        model="dall-e-3",
         prompt=prompt,
         n=num_images,
         size=size,
