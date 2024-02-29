@@ -21,7 +21,7 @@ def generate_prompt(style, medium, colors, objects, theme):
 def generate_image(prompt):
     # Set the model parameters
     num_images = 1
-    size = "1024x1024"
+    size = "800x480"
     response_format = "url"
 
     # Call the DALL-E API
