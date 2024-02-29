@@ -2,6 +2,7 @@ import base64
 import boto3
 import json
 import os
+import gzip
 
 
 def lambda_handler(event, context):
@@ -51,7 +52,7 @@ def lambda_handler(event, context):
         prompt_data = s3.get_object(Bucket=bucket_name, Key=text_key)['Body'].read().decode('utf-8')
 
         # Base64-encode the image data
-        encoded_image_data = base64.b64encode(image_data)
+        encoded_image_data = base64.b64encode(gzip.compress(image_data))
 
         return {
             'statusCode': 200,
