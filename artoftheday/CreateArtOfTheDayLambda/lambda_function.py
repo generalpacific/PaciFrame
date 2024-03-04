@@ -20,7 +20,7 @@ def generate_prompt(style, medium, colors, objects, theme):
 
 def generate_image(prompt):
     # Set the model parameters
-    num_images = 1
+    num_images = 5
     size = "1792x1024"
     response_format = "url"
 
@@ -33,28 +33,31 @@ def generate_image(prompt):
         response_format=response_format
     )
 
-    # Get the URL of the generated image
-    image_url = response['data'][0]['url']
+    for i in range(5):
+        # Get the URL of the generated image
+        image_url = response['data'][i]['url']
 
-    # Download the image from the URL
-    image_data = requests.get(image_url).content
+        # Download the image from the URL
+        image_data = requests.get(image_url).content
 
-    tz = pytz.timezone('US/Pacific')
-    now = datetime.now(tz)
-    # Generate the S3 key with today's date
-    date_str = now.strftime("%Y-%m-%d")
-    s3_key = f"{date_str}.png"
+        tz = pytz.timezone('US/Pacific')
+        now = datetime.now(tz)
+        # Generate the S3 key with today's date
+        date_str = now.strftime("%Y-%m-%d")
+        s3_key = f"{date_str}{i}.png"
+        if i == 0:
+            s3_key = f"{date_str}.png"
+        
+        # Upload the prompt to S3
+        s3 = boto3.client('s3')
+        s3_key_prompt = f"{date_str}-prompt.txt"
+        s3.put_object(Body=prompt, Bucket=os.environ['ARTOFTHEDAY_S3_BUCKET'], Key=s3_key_prompt)
 
-    # Upload the prompt to S3
-    s3 = boto3.client('s3')
-    s3_key_prompt = f"{date_str}-prompt.txt"
-    s3.put_object(Body=prompt, Bucket=os.environ['ARTOFTHEDAY_S3_BUCKET'], Key=s3_key_prompt)
-
-    # Upload the image data to S3
-    with tempfile.TemporaryFile() as temp_file:
-        temp_file.write(image_data)
-        temp_file.seek(0)
-        s3.upload_fileobj(temp_file, os.environ['ARTOFTHEDAY_S3_BUCKET'], s3_key)
+        # Upload the image data to S3
+        with tempfile.TemporaryFile() as temp_file:
+            temp_file.write(image_data)
+            temp_file.seek(0)
+            s3.upload_fileobj(temp_file, os.environ['ARTOFTHEDAY_S3_BUCKET'], s3_key)
     return date_str
 
 
