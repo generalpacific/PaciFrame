@@ -20,7 +20,7 @@ def generate_prompt(style, medium, colors, objects, theme):
 
 def generate_image(prompt):
     # Set the model parameters
-    num_images = 5
+    num_images = 1
     size = "1792x1024"
     response_format = "url"
 
@@ -33,7 +33,7 @@ def generate_image(prompt):
         response_format=response_format
     )
 
-    for i in range(5):
+    for i in range(num_images):
         # Get the URL of the generated image
         image_url = response['data'][i]['url']
 
