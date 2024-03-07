@@ -43,7 +43,7 @@ def lambda_handler(event, context):
         }
     date = event["queryStringParameters"]["date"]
 
-    max_images_per_day = os.environ['MAX_IMAGES_PER_DAY']
+    max_images_per_day = int(os.environ['MAX_IMAGES_PER_DAY'])
 
     # check the index of image if requested
     index = 0
