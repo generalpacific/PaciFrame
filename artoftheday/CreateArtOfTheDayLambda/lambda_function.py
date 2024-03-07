@@ -43,13 +43,15 @@ def generate_image(prompt, idx):
     now = datetime.now(tz)
     # Generate the S3 key with today's date
     date_str = now.strftime("%Y-%m-%d")
-    s3_key = f"{date_str}{idx}.png"
+    s3_key = f"{date_str}-{idx}.png"
     if idx == 0:
         s3_key = f"{date_str}.png"
 
     # Upload the prompt to S3
     s3 = boto3.client('s3')
     s3_key_prompt = f"{date_str}-prompt.txt"
+    if idx != 0:
+        s3_key_prompt = f"{date_str}-{idx}-prompt.txt"
     s3.put_object(Body=prompt, Bucket=os.environ['ARTOFTHEDAY_S3_BUCKET'], Key=s3_key_prompt)
 
     # Upload the image data to S3
@@ -87,7 +89,8 @@ def read_from_csv():
 def lambda_handler(event, context):
     metadata_dict = read_from_csv()
 
-    num_images = 5
+    num_images = os.environ['MAX_IMAGES_PER_DAY']
+    date_str = ""
     for i in range(num_images):
         prompt = generate_prompt(style=random.choice(metadata_dict["style"]),
                                  medium=random.choice(metadata_dict["medium"]),
@@ -95,8 +98,8 @@ def lambda_handler(event, context):
                                  objects=random.choice(metadata_dict["objects"]),
                                  theme=random.choice(metadata_dict["theme"])
                                  )
-        print("Generated prompt: " + prompt)
-        print("Generating image...")
+        print(f"Generated for idx: {i} prompt: {prompt}")
+        print(f"Generating image for idx {i}...")
         date_str = generate_image(prompt, idx=i)
     return {
         'statusCode': 200,
