@@ -33,7 +33,6 @@ def generate_image(prompt, idx):
         response_format=response_format
     )
 
-    
     # Get the URL of the generated image
     image_url = response['data'][0]['url']
 
@@ -47,7 +46,7 @@ def generate_image(prompt, idx):
     s3_key = f"{date_str}{idx}.png"
     if idx == 0:
         s3_key = f"{date_str}.png"
-    
+
     # Upload the prompt to S3
     s3 = boto3.client('s3')
     s3_key_prompt = f"{date_str}-prompt.txt"
@@ -87,7 +86,7 @@ def read_from_csv():
 
 def lambda_handler(event, context):
     metadata_dict = read_from_csv()
-    
+
     num_images = 5
     for i in range(num_images):
         prompt = generate_prompt(style=random.choice(metadata_dict["style"]),
@@ -98,9 +97,8 @@ def lambda_handler(event, context):
                                  )
         print("Generated prompt: " + prompt)
         print("Generating image...")
-        date_str = generate_image(prompt, idx = i)
+        date_str = generate_image(prompt, idx=i)
     return {
         'statusCode': 200,
         'body': json.dumps('Image saved. Date: ' + date_str)
     }
-
