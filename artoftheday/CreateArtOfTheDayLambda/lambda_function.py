@@ -89,7 +89,7 @@ def read_from_csv():
 def lambda_handler(event, context):
     metadata_dict = read_from_csv()
 
-    num_images = os.environ['MAX_IMAGES_PER_DAY']
+    num_images = int(os.environ['MAX_IMAGES_PER_DAY'])
     date_str = ""
     for i in range(num_images):
         prompt = generate_prompt(style=random.choice(metadata_dict["style"]),
