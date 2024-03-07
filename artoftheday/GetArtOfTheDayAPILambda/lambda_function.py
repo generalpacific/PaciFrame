@@ -43,10 +43,26 @@ def lambda_handler(event, context):
         }
     date = event["queryStringParameters"]["date"]
 
+    max_images_per_day = os.environ['MAX_IMAGES_PER_DAY']
+
     # check the index of image if requested
     index = 0
     if 'index' in event['queryStringParameters']:
-        index = int(event['queryStringParameters']['index'])
+        index_str = event['queryStringParameters']['index']
+        try:
+            index = int(index_str)
+        except ValueError:
+            print(f"ValueError: Cannot convert index: {index_str} to an integer due to inappropriate value.")
+        except TypeError:
+            print(f"TypeError: Cannot convert index: {index_str} to an integer due to inappropriate type.")
+        if index >= max_images_per_day:
+            return {
+                'statusCode': '400',
+                'body': f"Index cannot be greater than or equal to max: f{max_images_per_day}",
+                'headers': {
+                    'Access-Control-Allow-Origin': '*',
+                }
+            }
 
     bucket_name = os.environ['ART_OF_THE_DAY_BUCKET_NAME']
     image_key = f'{date}.png'  # The image key is the date with the ".png" extension
