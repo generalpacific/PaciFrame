@@ -43,9 +43,18 @@ def lambda_handler(event, context):
         }
     date = event["queryStringParameters"]["date"]
 
+    # check the index of image if requested
+    index = 0
+    if 'index' in event['queryStringParameters']:
+        index = int(event['queryStringParameters']['index'])
+
     bucket_name = os.environ['ART_OF_THE_DAY_BUCKET_NAME']
     image_key = f'{date}.png'  # The image key is the date with the ".png" extension
+    if index != 0:
+        image_key = f'{date}-{index}.png'
     text_key = f'{date}-prompt.txt'  # The text key is the date with the ".txt" extension
+    if index != 0:
+        text_key = f'{date}-{index}-prompt.txt'
 
     try:
         image_data = s3.get_object(Bucket=bucket_name, Key=image_key)['Body'].read()
