@@ -1,18 +1,21 @@
-style,medium,color palette,objects,theme
-renaissance,oil on panel,"earth tones, blues, greens","mona lisa (figure), landscape background","beauty, mystery, enigma"
-renaissance,tempera on canvas,pastel hues,"venus, shell, sea","classical mythology, beauty, rebirth"
-renaissance,fresco,"neutral hues, with emphasis on skin tones","human figures, clouds, hands","divine intervention, creation, humanity's potential."
-renaissance,tempera and oil on plaster,earthy tones,"table, food, disciples",religious betrayal and sacrifice.
-romanticism,relief etching,"dark, muted tones with bursts of bright colors","god-like figure, compass, and a fiery orb",divine creation and control.
-dutch baroque,oil on canvas,earthy tones,"girl, pearl earring, turban","mystery, beauty, femininity."
-baroque,oil on canvas,"dark, muted tones","musket, halberds, soldiers","civic guard, military power"
-renaissance,oil on canvas,"earth tones, muted blues","landscape, sea, ship, farmer, icarus","tragedy, hubris, downfall."
-high renaissance,fresco painting,earth tones with pop of vibrant colors,"architecture, figures, symbols",philosophy and learning
-baroque,oil on canvas,"limited (mostly black, white, and shades of brown)","princess, maids-of-honor, courtiers, mirror, dog","courtly scene, hierarchy, reflection"
-baroque,oil on canvas,muted earth tones,"father, son, servants",redemption through forgiveness
-surrealism,oil on canvas,"cool tones (blues, greys)","melting watches, ants, distorted landscape","time, memory, decay."
-renaissance,oil on panel,earth tones,"tower, people, construction materials",human ambition and folly
-surrealism,oil on canvas,bright and bold,"fetus, globe, rocks, child",political revolution and transformation
-art nouveau,oil on canvas,"gold, black, and jewel tones","couple, flowers, patterns",love and intimacy.
-impressionism,oil on canvas,"pastel, soft tones","boats, water, harbor","nature, light, atmosphere"
-expressionism,oil on canvas,"vibrant, contrasting","person, bridge, buildings","inner torment, existential angst"
+style,medium,colors,theme,artist
+renaissance,oil on poplar,"black, white, earth tones, green, brown","portraiture, mystery, enigmatic smile",leonardo da vinci
+italian renaissance,tempera on canvas,"light blue, white, green, red, peach","mythology, beauty, love, birth",sandro botticelli
+high renaissance,fresco,"royal blue, gold, pale pink, white, brown","religious, biblical, creation, humanity, divinity",michelangelo buonarroti
+renaissance,tempera and oil on plaster,"brown, blue, red, white, black","religious, betrayal, friendship, sacrifice, communion",leonardo da vinci
+romanticism,watercolor with pen and black ink over graphite,"gold, white, blue, red, black","religion, spirituality, creation, power, enlightenment",william blake
+baroque,oil on canvas,"dark blue, pearl white, soft yellow, pale pink, deep black","intimacy, innocence, mystery, contemplation, beauty",johannes vermeer
+baroque,oil on canvas,"black, white, gold, brown, red","night, vigilance, social hierarchy, civic pride",rembrandt van rijn
+renaissance,oil on canvas,"blue, white, green, brown, yellow","mythology, tragedy, daily life, nature",pieter bruegel the elder
+high renaissance,fresco,"blue, cream, red, brown, green","classical philosophy, knowledge, learning, wisdom",raffaello santi
+baroque,oil on canvas,"black, white, brown, gold, red","royalty, servitude, childhood, reflection, perspective",diego velazquez
+baroque,oil on canvas,"brown, black, white, red, gold","forgiveness, repentance, redemption, fatherhood, love",rembrandt van rijn
+surrealism,oil on canvas,"beige, blue, brown, yellow, black","time, space, reality, dreams, memory",salvador dali
+renaissance,oil on panel,"brown, blue, green, white, gray","biblical narrative, confusion of languages, human hubris, architectural representation",pieter bruegel the elder
+surrealism,oil on canvas,"blue, brown, white, black, pink","transformation, birth, human evolution, time, geography",salvador dali
+"symbolism, art nouveau","oil, gold leaf on canvas","gold, blue, black, green, red","love, intimacy, passion, opulence, mysticism",gustav klimt
+impressionism,oil on canvas,"blue, orange, black, white, grey","nature, tranquility, morning, light, reflection",claude monet
+expressionism,"oil, tempera, and pastel on cardboard","red, blue, black, orange, yellow","anxiety, isolation, fear, despair, inner turmoil",edvard munch
+post-impressionism,oil on canvas,"blue, yellow, white, black, green","nature, night, emotions, rural life, solitude",vincent van gogh
+ukiyo-e,woodblock print,"prussian blue, white, beige, grey, black","power of nature, contrast of human life and nature, danger and beauty of sea",katsushika hokusai
+cubism,oil on canvas,"blue, white, grey, black, brown","travel, memory, nostalgia",pablo picasso

@@ -8,31 +8,43 @@ PAINTINGS = ["MONA LISA BY LEONARDO DA VINCI", "THE BIRTH OF VENUS BY SANDRO BOT
              "THE CREATION OF ADAM BY MICHELANGELO BUONARROTI", "THE LAST SUPPER BY LEONARDO DA VINCI",
              "THE ANCIENT OF DAYS BY WILLIAM BLAKE", "GIRL WITH A PEARL EARRING BY JOHANNES VERMEER",
              "THE NIGHT WATCH BY REMBRANDT VAN RIJN", "LANDSCAPE WITH THE FALL OF ICARUS BY PIETER BRUEGEL THE ELDER",
-             "THE SCHOOL OF ATHENS BY RAFFAELLO SANTI", "LAS MENINAS BY DIEGO VELÁZQUEZ",
-             "THE RETURN OF THE PRODIGAL SON BY REMBRANDT VAN RIJN", "THE PERSISTENCE OF MEMORY BY SALVADOR DALÍ",
+            "THE SCHOOL OF ATHENS BY RAFFAELLO SANTI", "LAS MENINAS BY DIEGO VELAZQUEZ",
+             "THE RETURN OF THE PRODIGAL SON BY REMBRANDT VAN RIJN", "THE PERSISTENCE OF MEMORY BY SALVADOR DALI",
              "THE TOWER OF BABEL BY PIETER BRUEGEL THE ELDER",
-             "GEOPOLITICUS CHILD WATCHING THE BIRTH OF THE NEW MAN BY SALVADOR DALÍ", "THE KISS BY GUSTAV KLIMT",
+             "GEOPOLITICUS CHILD WATCHING THE BIRTH OF THE NEW MAN BY SALVADOR DALI", "THE KISS BY GUSTAV KLIMT",
              "IMPRESSION, SUNRISE BY CLAUDE MONET", "THE SCREAM BY EDVARD MUNCH",
              "THE STARRY NIGHT BY VINCENT VAN GOGH", "THE GREAT WAVE OF KANAGAWA BY KATSUSHIKA HOKUSAI",
-             "SOUVENIR FROM HAVRE BY PABLO PICASSO"]
+             "SOUVENIR FROM HAVRE BY PABLO PICASSO", "GUERNICA BY PABLO PICASSO"]
 
 STAGING_PAINTING = ["MONA LISA BY LEONARDO DA VINCI", "THE TOWER OF BABEL BY PIETER BRUEGEL THE ELDER"]
 
 
 def generate_prompt(painting):
-    return '''A painting can be classified into:
+    return '''The following data will be used to create new paintings for different objects. A painting can be classified into:
                 Style
                 Medium
-                Color palette
-                Objects
-                Theme in 5 words or less
+                Color palette(provide atleast 5 colors)
+                Theme in 10 works or less without describing the objects in the painting
+                Artist
 
-                Classify {}'''.format(painting)
+                Classify {}
+                
+                Provide the answer in format:
+                Style
+                Medium
+                Colors
+                Theme
+                Artist
+                '''.format(painting)
 
 
 def generate_text(painting, model):
+    client = openai.OpenAI()
     prompt = generate_prompt(painting)
-    completion = openai.ChatCompletion.create(model=model, messages=[{"role": "user", "content": prompt}])
+    message = [{"role": "user", "content": prompt}]
+    completion = client.chat.completions.create(model=model, messages=message, max_tokens=150,
+                                                temperature=0.7, n=1,
+                                                stop=None)
     answer = completion.choices[0].message.content
     return answer
 
@@ -63,13 +75,16 @@ def write_to_csv(painting_metadata_dict):
 
 
 def main():
-    model = "gpt-3.5-turbo"
-    painting_metadata_dict = {"style": [], "medium": [], "color palette": [], "objects": [], "theme": []}
+    model = "gpt-4"
+    painting_metadata_dict = {"style": [], "medium": [], "colors": [], "theme": [], "artist": []}
     for painting in PAINTINGS:
         print("classifying {}".format(painting))
         answer = generate_text(painting, model)
         print(answer)
-        parse_answer(answer, painting_metadata_dict)
+        try:
+            parse_answer(answer, painting_metadata_dict)
+        except Exception as e:
+            print(f"An error occured while parsing answer {answer} : {e}")
     print("Final dictionary: " + str(painting_metadata_dict))
     print("Writing to csv")
     write_to_csv(painting_metadata_dict)
