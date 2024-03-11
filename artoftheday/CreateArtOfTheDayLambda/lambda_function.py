@@ -32,7 +32,7 @@ def generate_prompt_for_mix_and_match(style, medium, colors, objects, theme):
                                                                                            colors, theme)
 
 
-def generate_prompt_for_new_object(object, style, medium, artist, theme):
+def generate_prompt_for_new_object(object, style, medium, theme, artist):
     return '''Generate a {} {} painting that depicts {}. 
     The painting explores {} themes.
     Paint it like {} would paint it.'''.format(style, medium, object, theme, artist, artist)
