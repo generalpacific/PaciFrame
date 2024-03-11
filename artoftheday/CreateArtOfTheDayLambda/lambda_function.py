@@ -32,10 +32,10 @@ def generate_prompt_for_mix_and_match(style, medium, colors, objects, theme):
                                                                                            colors, theme)
 
 
-def generate_prompt_for_new_object(object, style, medium, theme, artist):
+def generate_prompt_for_new_object(new_object, style, medium, theme, artist):
     return '''Generate a {} {} painting that depicts {}. 
     The painting explores {} themes.
-    Paint it like {} would paint it.'''.format(style, medium, object, theme, artist, artist)
+    Paint it like {} would paint it.'''.format(style, medium, new_object, theme, artist, artist)
 
 
 def generate_image(prompt, idx):
@@ -111,6 +111,7 @@ def lambda_handler(event, context):
 
     num_images = int(os.environ['MAX_IMAGES_PER_DAY'])
     date_str = ""
+    new_object = random.choice(SUPPORTED_OBJECTS)
     for i in range(num_images):
         prompt = ""
         print(f"Current ArtMode: {ART_MODE}")
@@ -122,9 +123,8 @@ def lambda_handler(event, context):
                                                        theme=random.choice(metadata_dict["theme"])
                                                        )
         else:
-            object = random.choice(SUPPORTED_OBJECTS)
             painting_idx = random.randint(0, len(metadata_dict["style"]) - 1)
-            prompt = generate_prompt_for_new_object(object, metadata_dict["style"][painting_idx],
+            prompt = generate_prompt_for_new_object(new_object, metadata_dict["style"][painting_idx],
                                                     metadata_dict["medium"][painting_idx],
                                                     metadata_dict["theme"][painting_idx],
                                                     metadata_dict["artist"][painting_idx])
