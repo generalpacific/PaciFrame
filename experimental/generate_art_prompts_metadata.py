@@ -24,6 +24,7 @@ def generate_prompt(painting):
                 Style
                 Medium
                 Color palette(provide atleast 5 colors)
+                Objects in the painting
                 Theme in 10 works or less without describing the objects in the painting
                 Artist
 
@@ -33,6 +34,7 @@ def generate_prompt(painting):
                 Style
                 Medium
                 Colors
+                Objects
                 Theme
                 Artist
                 '''.format(painting)
@@ -76,7 +78,8 @@ def write_to_csv(painting_metadata_dict):
 
 def main():
     model = "gpt-4"
-    painting_metadata_dict = {"style": [], "medium": [], "colors": [], "theme": [], "artist": []}
+    painting_metadata_dict = {"style": [], "medium": [], "colors": [], "theme":
+                              [], "objects": [], "artist": []}
     for painting in PAINTINGS:
         print("classifying {}".format(painting))
         answer = generate_text(painting, model)
@@ -84,7 +87,7 @@ def main():
         try:
             parse_answer(answer, painting_metadata_dict)
         except Exception as e:
-            print(f"An error occured while parsing answer {answer} : {e}")
+            print("An error occured while parsing answer {}: {}".format(answer, e))
     print("Final dictionary: " + str(painting_metadata_dict))
     print("Writing to csv")
     write_to_csv(painting_metadata_dict)

@@ -1,21 +1,21 @@
-style,medium,colors,theme,artist
-renaissance,oil on poplar,"black, white, earth tones, green, brown","portraiture, mystery, enigmatic smile",leonardo da vinci
-italian renaissance,tempera on canvas,"light blue, white, green, red, peach","mythology, beauty, love, birth",sandro botticelli
-high renaissance,fresco,"royal blue, gold, pale pink, white, brown","religious, biblical, creation, humanity, divinity",michelangelo buonarroti
-renaissance,tempera and oil on plaster,"brown, blue, red, white, black","religious, betrayal, friendship, sacrifice, communion",leonardo da vinci
-romanticism,watercolor with pen and black ink over graphite,"gold, white, blue, red, black","religion, spirituality, creation, power, enlightenment",william blake
-baroque,oil on canvas,"dark blue, pearl white, soft yellow, pale pink, deep black","intimacy, innocence, mystery, contemplation, beauty",johannes vermeer
-baroque,oil on canvas,"black, white, gold, brown, red","night, vigilance, social hierarchy, civic pride",rembrandt van rijn
-renaissance,oil on canvas,"blue, white, green, brown, yellow","mythology, tragedy, daily life, nature",pieter bruegel the elder
-high renaissance,fresco,"blue, cream, red, brown, green","classical philosophy, knowledge, learning, wisdom",raffaello santi
-baroque,oil on canvas,"black, white, brown, gold, red","royalty, servitude, childhood, reflection, perspective",diego velazquez
-baroque,oil on canvas,"brown, black, white, red, gold","forgiveness, repentance, redemption, fatherhood, love",rembrandt van rijn
-surrealism,oil on canvas,"beige, blue, brown, yellow, black","time, space, reality, dreams, memory",salvador dali
-renaissance,oil on panel,"brown, blue, green, white, gray","biblical narrative, confusion of languages, human hubris, architectural representation",pieter bruegel the elder
-surrealism,oil on canvas,"blue, brown, white, black, pink","transformation, birth, human evolution, time, geography",salvador dali
-"symbolism, art nouveau","oil, gold leaf on canvas","gold, blue, black, green, red","love, intimacy, passion, opulence, mysticism",gustav klimt
-impressionism,oil on canvas,"blue, orange, black, white, grey","nature, tranquility, morning, light, reflection",claude monet
-expressionism,"oil, tempera, and pastel on cardboard","red, blue, black, orange, yellow","anxiety, isolation, fear, despair, inner turmoil",edvard munch
-post-impressionism,oil on canvas,"blue, yellow, white, black, green","nature, night, emotions, rural life, solitude",vincent van gogh
-ukiyo-e,woodblock print,"prussian blue, white, beige, grey, black","power of nature, contrast of human life and nature, danger and beauty of sea",katsushika hokusai
-cubism,oil on canvas,"blue, white, grey, black, brown","travel, memory, nostalgia",pablo picasso
+style,medium,colors,theme,objects,artist
+renaissance,oil on poplar,"burnt umber, raw sienna, lead white, black, verdaccio",portrait of a woman with enigmatic smile,"woman (mona lisa), landscape",leonardo da vinci
+italian renaissance,tempera on canvas,"blue, white, green, pink, gold","classical mythology, beauty, love, birth","venus, shell, zephyr, aura, orange trees",sandro botticelli
+high renaissance,fresco,"beige, white, red, blue, gold",divine creation of man,"adam, god, angels, eve",michelangelo buonarroti
+renaissance,tempera and oil on plaster,"blue, white, gold, red, brown","religious, betrayal, communion, last meal","people, table, wall, windows, food, wine",leonardo da vinci
+romanticism,"watercolor, ink, and gold on paper","blue, gold, white, black, red","divine creation, spiritual enlightenment","old man, compasses, sun, clouds",william blake
+baroque,oil on canvas,"blue, yellow, white, black, brown","innocence, mystery, and beauty","girl, pearl earring",johannes vermeer
+baroque,oil on canvas,"black, white, brown, gold, red","civic guardsmen, night patrol, light and shadow","people, weapons, clothing, animals",rembrandt van rijn
+renaissance,oil on canvas,"blue, green, brown, white, yellow",the insignificance of individual tragedies in the grand scheme of life,"icarus, villagers, ships, ploughman, shepherd",pieter bruegel the elder
+high renaissance,fresco,"white, black, red, blue, gold",intellectual and philosophical exchange in classical times,"philosophers, architectural structures, books, stairs, statues",raffaello santi
+baroque,oil on canvas,"black, white, gold, red, brown","court life, self-portraiture, light and perspective","the infanta margaret theresa, her maids of honor, bodyguard, two dwarfs, a dog, diego velázquez himself.",diego velázquez
+baroque,oil on canvas,"dark brown, light brown, white, black, red","forgiveness, love and mercy","father, prodigal son, elder brother",rembrandt van rijn
+surrealism,oil on canvas,"beige, blue, brown, yellow, black","passage of time, dream state, disintegration of reality","clocks, tree, human-like figure",salvador dali
+renaissance,oil on panel,"blue, green, brown, white, gray","human ambition, divine punishment","tower, people, landscape, buildings",pieter bruegel the elder
+surrealism,oil on canvas,"blue, white, pink, brown, black","transformation, birth and evolution","globe, man, child, hand, egg",salvador dali
+"symbolism, art nouveau","oil, gold, and silver leaf on canvas","gold, black, red, ivory, green","love, passion, and spirituality","two figures (a man and a woman) entwined in an embrace, a flowered meadow",gustav klimt
+expressionism,"oil, tempera, and pastel on cardboard","blue, orange, yellow, white, black","despair, anxiety, isolation","bridge, screaming figure, water, sky",edvard munch
+post-impressionism,oil on canvas,"blue, yellow, white, black, green",nighttime tranquility and turbulence,"stars, moon, village, cypress tree",vincent van gogh
+ukiyo-e,woodblock print,"prussian blue, white, brown, teal, beige",the power and unpredictability of nature,"wave, mount fuji, boats",katsushika hokusai
+cubism,oil on canvas,"blue, white, black, grey, brown",still life with human figure,"a woman, a vase, a table",pablo picasso
+cubism,oil on canvas,"grey, white, black","war, suffering, chaos, destruction, innocent victims","bull, horse, people, lightbulb, bird",pablo picasso
