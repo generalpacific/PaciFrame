@@ -113,8 +113,8 @@ def lambda_handler(event, context):
     date_str = ""
     for i in range(num_images):
         prompt = ""
+        print(f"Current ArtMode: {ART_MODE}")
         if ART_MODE == ArtMode.MIX_AND_MATCH:
-            print(f"Current ArtMode: {ART_MODE}")
             prompt = generate_prompt_for_mix_and_match(style=random.choice(metadata_dict["style"]),
                                                        medium=random.choice(metadata_dict["medium"]),
                                                        colors=random.choice(metadata_dict["colors"]),
@@ -122,7 +122,6 @@ def lambda_handler(event, context):
                                                        theme=random.choice(metadata_dict["theme"])
                                                        )
         else:
-            print(f"Current ArtMode: {ART_MODE}")
             object = random.choice(SUPPORTED_OBJECTS)
             painting_idx = random.randint(0, len(metadata_dict["style"]) - 1)
             prompt = generate_prompt_for_new_object(object, metadata_dict["style"][painting_idx],
