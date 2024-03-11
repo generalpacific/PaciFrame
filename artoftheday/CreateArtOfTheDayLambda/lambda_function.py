@@ -8,14 +8,34 @@ import random
 import requests
 import tempfile
 from datetime import datetime
+from enum import Enum
 
 openai.api_key = os.environ["OPENAI_API_KEY"]
 
 
-def generate_prompt(style, medium, colors, objects, theme):
+class ArtMode(Enum):
+    MIX_AND_MATCH = 1
+    NEW_OBJECT = 2
+
+
+ART_MODE = ArtMode.NEW_OBJECT
+
+SUPPORTED_OBJECTS = ["an android statue", "Torres del paine", "Istanbul skyline", "a Raspberry pi",
+                     "a runner running on a trail", "a grand piano", "a visualization languages", "a japanese garden",
+                     "a man meditating under a tree in a valley", "a home library with famous books",
+                     "a formula one car", "pyramids of Giza along with Sphinx", "view of the Alhambra"]
+
+
+def generate_prompt_for_mix_and_match(style, medium, colors, objects, theme):
     return '''Generate a {} {} painting that depicts {}. 
     The color palette of the painting is {} and the painting explores {} themes.'''.format(style, medium, objects,
                                                                                            colors, theme)
+
+
+def generate_prompt_for_new_object(object, style, medium, artist, theme):
+    return '''Generate a {} {} painting that depicts {}. 
+    The painting explores {} themes.
+    Paint it like {} would paint it.'''.format(style, medium, object, theme, artist, artist)
 
 
 def generate_image(prompt, idx):
@@ -92,12 +112,23 @@ def lambda_handler(event, context):
     num_images = int(os.environ['MAX_IMAGES_PER_DAY'])
     date_str = ""
     for i in range(num_images):
-        prompt = generate_prompt(style=random.choice(metadata_dict["style"]),
-                                 medium=random.choice(metadata_dict["medium"]),
-                                 colors=random.choice(metadata_dict["color palette"]),
-                                 objects=random.choice(metadata_dict["objects"]),
-                                 theme=random.choice(metadata_dict["theme"])
-                                 )
+        prompt = ""
+        if ART_MODE == ArtMode.MIX_AND_MATCH:
+            print(f"Current ArtMode: {ART_MODE}")
+            prompt = generate_prompt_for_mix_and_match(style=random.choice(metadata_dict["style"]),
+                                                       medium=random.choice(metadata_dict["medium"]),
+                                                       colors=random.choice(metadata_dict["colors"]),
+                                                       objects=random.choice(metadata_dict["objects"]),
+                                                       theme=random.choice(metadata_dict["theme"])
+                                                       )
+        else:
+            print(f"Current ArtMode: {ART_MODE}")
+            object = random.choice(SUPPORTED_OBJECTS)
+            painting_idx = random.randint(0, len(metadata_dict["style"]) - 1)
+            prompt = generate_prompt_for_new_object(object, metadata_dict["style"][painting_idx],
+                                                    metadata_dict["medium"][painting_idx],
+                                                    metadata_dict["theme"][painting_idx],
+                                                    metadata_dict["artist"][painting_idx])
         print(f"Generated for idx: {i} prompt: {prompt}")
         print(f"Generating image for idx {i}...")
         date_str = generate_image(prompt, idx=i)
