@@ -45,7 +45,7 @@ def generate_image(prompt, idx):
     response_format = "url"
 
     # Call the DALL-E API
-    response = openai.Image.create(
+    response = openai.images.generate(
         model="dall-e-3",
         prompt=prompt,
         n=num_images,
@@ -54,7 +54,8 @@ def generate_image(prompt, idx):
     )
 
     # Get the URL of the generated image
-    image_url = response['data'][0]['url']
+    print(response)
+    image_url = response.data[0].url
 
     # Download the image from the URL
     image_data = requests.get(image_url).content
@@ -135,3 +136,4 @@ def lambda_handler(event, context):
         'statusCode': 200,
         'body': json.dumps('Image saved. Date: ' + date_str)
     }
+
