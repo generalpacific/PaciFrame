@@ -72,6 +72,8 @@ def lambda_handler(event, context):
     if index != 0:
         text_key = f'{date}-{index}-prompt.txt'
 
+    print(f"Getting image for key: {image_key} and text_key: {text_key}")
+
     try:
         image_data = s3.get_object(Bucket=bucket_name, Key=image_key)['Body'].read()
         prompt_data = s3.get_object(Bucket=bucket_name, Key=text_key)['Body'].read().decode('utf-8')
