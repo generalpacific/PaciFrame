@@ -41,7 +41,7 @@ STEPS = 25                                         # FLUX dev sweet spot
 GUIDANCE = 3.5
 MODEL_ID = "black-forest-labs/FLUX.1-dev"
 
-RCLONE_REMOTE = os.environ.get("RCLONE_REMOTE", "gdrive:PaciFramePhotos")
+RCLONE_REMOTE = os.environ.get("RCLONE_REMOTE", "gdrive:Inky_Photos")
 FILENAME_PREFIX = "artoftheday"                    # paciframe.py filters by this
 UPLOAD_TO_DRIVE = os.environ.get("UPLOAD_TO_DRIVE", "1") == "1"
 DEFAULT_COUNT = 5
