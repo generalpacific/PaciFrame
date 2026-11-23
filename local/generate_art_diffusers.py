@@ -5,7 +5,6 @@ PaciFrame art generator — RTX 3090 Ti edition.
 - Generates at 2x native Inky res (1600x960) → downscale on Pi for crisp dithering
 - Refuses to run on battery (no-op on a desktop)
 - Uploads each image + prompt sidecar to Google Drive via rclone
-- Candidate selection scaffolded but off by default
 
 Target display: Pimoroni Inky Impression 7.3" (800x480, 5:3).
 
@@ -181,11 +180,13 @@ def build_prompt(metadata_csv: Path | None = None) -> tuple[str, str]:
 # ---------- pipeline ----------
 def load_pipe() -> FluxPipeline:
     print(f"Loading {MODEL_ID}...")
-    pipe = FluxPipeline.from_pretrained(MODEL_ID, torch_dtype=torch.bfloat16)
-    pipe.to("cuda")
+    pipe = FluxPipeline.from_pretrained(
+        MODEL_ID, torch_dtype=torch.bfloat16, low_cpu_mem_usage=True,
+    )
+    pipe.enable_model_cpu_offload()
+    pipe.vae.enable_tiling()
     pipe.set_progress_bar_config(disable=True)
     return pipe
-
 
 def _generate_image(pipe: FluxPipeline, prompt: str, seed: int):
     return pipe(
@@ -194,31 +195,6 @@ def _generate_image(pipe: FluxPipeline, prompt: str, seed: int):
         num_inference_steps=STEPS, guidance_scale=GUIDANCE,
         generator=torch.Generator("cuda").manual_seed(seed),
     ).images[0]
-
-
-def _pick_best_candidate(image_paths, prompt) -> int:
-    """Ask Claude Haiku which candidate best matches the prompt. Returns index."""
-    try:
-        import base64, anthropic
-    except ImportError:
-        print("  !! candidate selection on but `anthropic` not installed; keeping #0")
-        return 0
-    client = anthropic.Anthropic()
-    content = [{"type": "text",
-                "text": (f"Here are {len(image_paths)} candidates for the prompt:\n"
-                         f"\"{prompt}\"\n\n"
-                         "Which best fits the prompt's aesthetic and would look best "
-                         "as framed art? Reply with ONLY the number (0, 1, 2...).")}]
-    for p in image_paths:
-        content.append({"type": "image",
-                        "source": {"type": "base64", "media_type": "image/jpeg",
-                                   "data": base64.b64encode(p.read_bytes()).decode()}})
-    msg = client.messages.create(model="claude-haiku-5-5", max_tokens=10,
-                                 messages=[{"role": "user", "content": content}])
-    try:
-        return int(msg.content[0].text.strip()[0])
-    except (ValueError, IndexError):
-        return 0
 
 
 def generate_one(pipe: FluxPipeline, metadata_csv: Path | None) -> Path:
