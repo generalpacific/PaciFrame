@@ -159,9 +159,35 @@ SUBJECTS = [
     "a salt flat mirroring a dramatic sky at sunset",
     "a wooden cabin in a birch forest in autumn",
     "an open window over a Mediterranean village at dawn",
+    # --- Modern-object + old-style anachronisms ---
+    "an astronaut on a horse crossing a frozen river at dawn",
+    "a lone commuter waiting at a futuristic train platform",
+    "a SpaceX rocket launching over a fishing village",
+    "a satellite dish on a thatched-roof cottage",
+    "a woman reading an iPad by candlelight in a stone chamber",
+    "a self-driving car winding through terraced rice paddies",
+    "a drone photographer hovering above a medieval castle",
+    "an electric motorcycle parked outside a shrine",
+    "a server room with monks tending to the machines",
+    "a cyclist in modern gear crossing a wooden footbridge in mist",
+    "a scientist in a lab coat examining a glowing specimen in a baroque study",
+    "an astronaut floating above a classical Mediterranean harbor",
+    "a wind turbine on a hill above an old village",
+    "a programmer at a modern laptop in a Vermeer-style interior",
+    "a solar farm stretching across a desert canyon",
+    "an electric car charging at a roadside temple",
+    "a modern coffee shop interior with monumental Renaissance architecture",
+    "a food delivery courier on an e-bike in a snowy alpine village",
+    "a space station orbiting a serene Earth painted in ukiyo-e clouds",
+    "a VR headset wearer standing alone on a windswept moor",
+    "a quantum computer glowing in a candlelit cathedral",
+    "a self-driving taxi dropping off a passenger at an Edo-period inn",
+    "a surveillance camera mounted on an ancient stone gate",
+    "an electric guitar leaning against a stone wall in a sunlit courtyard",
 ]
 
-QUALITY_TAIL = "highly detailed, masterpiece composition, gallery quality, rich atmosphere"
+QUALITY_TAIL = ("highly detailed, masterpiece composition, gallery quality, "
+                "rich atmosphere, striking juxtaposition of past and present")
 
 
 def build_prompt(metadata_csv: Path | None = None) -> tuple[str, str]:
